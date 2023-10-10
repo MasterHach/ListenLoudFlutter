@@ -9,6 +9,7 @@ class ScreenTitle extends StatelessWidget {
     return Text(
       title,
       style: const TextStyle(
+        fontFamily: "Gugi",
         fontSize: 40,
         fontWeight: FontWeight.bold,
       ),

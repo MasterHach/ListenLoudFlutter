@@ -17,12 +17,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        textTheme: const TextTheme(
-          bodyMedium: TextStyle(
-            fontFamily: 'Roboto',
-          ),
-        )
-      ),
+          textTheme: const TextTheme(
+        bodyMedium: TextStyle(
+          fontFamily: 'Roboto',
+        ),
+      )),
       initialRoute: HomeScreen.id,
       routes: {
         HomeScreen.id: (context) => const HomeScreen(),
