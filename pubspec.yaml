@@ -36,6 +36,7 @@ dependencies:
   dio: ^5.3.3
   shared_preferences: ^2.2.2
   jwt_decoder: ^2.0.1
+  audioplayers: ^5.2.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -85,6 +86,16 @@ flutter:
     - family: Gugi
       fonts:
         - asset: assets/fonts/Gugi-Regular.ttf
+    - family: Lato
+      fonts:
+        - asset: assets/fonts/Lato-Bold.ttf
+        - asset: assets/fonts/Lato-Italic.ttf
+        - asset: assets/fonts/Lato-Regular.ttf
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-Regular.ttf
+        - asset: assets/fonts/Montserrat-Bold.ttf
+        - asset: assets/fonts/Montserrat-Italic.ttf
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a

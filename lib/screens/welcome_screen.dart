@@ -1,10 +1,5 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:testing/widgets/screen_title.dart';
-
+import 'package:testing/pages/homepage.dart';
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({super.key});
   static String id = 'welcome_screen';
@@ -14,52 +9,40 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  late SharedPreferences prefs;
-  String username = 'Initialization...';
-  static final url =
-      '${dotenv.env['URL'] ?? 'http://localhost:8080'}/api/v1/users';
 
-  @override
-  void initState() {
-    super.initState();
-    getUser();
-  }
+  int _selectedIndex = 0;
 
-  void getUser() async {
-    Dio dio = Dio();
-
-    prefs = await SharedPreferences.getInstance();
-
-    final token = prefs.getString('access_token');
-
-    dio.options.receiveTimeout = const Duration(seconds: 10);
-    dio.options.connectTimeout = const Duration(seconds: 10);
-    dio.options.headers['Authorization'] = 'Bearer $token';
-
-    Response response = await dio.get(url);
-
-    username = response.data['username'];
-
+  void _navigateBottomBar(int index) {
     setState(() {
-      
+      _selectedIndex = index;
     });
   }
+
+  final List<Widget> _pages = [
+    const HomePage(),
+    const Center(child: Text('Search'),),
+    const Center(child: Text('Plus'),),
+    const Center(child: Text('Chat'),),
+    const Center(child: Text('Profile'),),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: WillPopScope(
-        onWillPop: () async {
-          SystemNavigator.pop();
-          return false;
-        },
-        child: Center(
-          child: ScreenTitle(
-            title: 'Welcome, $username!',
-          ),
-        ),
-      ),
-    );
+        body: _pages[_selectedIndex],
+        bottomNavigationBar: BottomNavigationBar(
+            currentIndex: _selectedIndex,
+            onTap: _navigateBottomBar,
+            type: BottomNavigationBarType.fixed,
+            items: const [
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+              BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.add_box_rounded), label: ''),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.chat_bubble_rounded), label: 'Chat'),
+              BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+            ]),
+      );
   }
 }

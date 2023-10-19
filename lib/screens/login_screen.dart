@@ -49,7 +49,6 @@ class _LoginScreenState extends State<LoginScreen> {
         return false;
       },
       child: Scaffold(
-        backgroundColor: Colors.white,
         body: LoadingOverlay(
           isLoading: _saving,
           child: SafeArea(
