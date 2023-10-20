@@ -17,8 +17,6 @@ class PostTemplate extends StatefulWidget {
 class _PostTemplateState extends State<PostTemplate> {
   final audioPlayer = AudioPlayer();
   bool _isPlaying = false;
-  late bool _isLiked;
-  late int _likesCount;
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
 
@@ -31,9 +29,6 @@ class _PostTemplateState extends State<PostTemplate> {
   void initState() {
     super.initState();
     loadAudio();
-
-    _isLiked = widget.music.isLiked;
-    _likesCount = widget.music.likesCount;
 
     audioPlayer.onPlayerStateChanged.listen((state) {
       setState(() {
@@ -224,21 +219,21 @@ class _PostTemplateState extends State<PostTemplate> {
                       GestureDetector(
                         onTap: () async {
                           setState(() {
-                            _isLiked ? _likesCount-- : _likesCount++;
-                            _isLiked = !_isLiked;
+                            widget.music.isLiked ? widget.music.likesCount-- : widget.music.likesCount++;
+                            widget.music.isLiked = !widget.music.isLiked;
                           });
                           await rateAudio();
                         },
                         child: Icon(
-                          _isLiked ? Icons.favorite : Icons.favorite_border,
+                          widget.music.isLiked ? Icons.favorite : Icons.favorite_border,
                           size: 40,
-                          color: _isLiked ? Colors.red : null,
+                          color: widget.music.isLiked ? Colors.red : null,
                         ),
                       ),
                       const SizedBox(
                         height: 5,
                       ),
-                      Text(_likesCount.toString()),
+                      Text(widget.music.likesCount.toString()),
                     ],
                   ),
                 ],

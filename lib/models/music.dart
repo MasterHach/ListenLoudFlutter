@@ -10,8 +10,8 @@ class Music {
   final String audioUrl;
   final User author;
   final List<Tag> tags;
-  final int likesCount;
-  final bool isLiked;
+  int likesCount;
+  bool isLiked;
 
   Music({required this.id, required this.name, required this.description, required this.imageUrl, required this.audioUrl, required this.author, required this.tags, required this.likesCount, required this.isLiked});
 
